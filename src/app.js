@@ -42,9 +42,9 @@ window.onload = () => {
   const pitchSliderOsc3 = document.getElementById('pitchOsc3');
   const pitchOsc3 = new Pitch(sineWave, pitchSliderOsc3);
 
-  sawtoothWave.play();  
-  squareWave.play();
-  sineWave.play();
+  // sawtoothWave.play();  /stacked ocsilators work
+  // squareWave.play();
+  // sineWave.play();
 
   // const vol = document.getElementById('volume');
   // let volValue = 0.1;
@@ -57,28 +57,72 @@ window.onload = () => {
   //   })
 
 
-  // const body = document.getElementById('body');
-  // let currentSound = null;
+  const body = document.getElementById('body');
+  let currentSound = null;
 
-  // body.addEventListener('keydown', function(event) {
-  //   if(event.key === 'c' && currentSound === null) {
-  //     currentSound = new Pizzicato.Sound({ 
-  //     source: 'wave',
-  //       options: {
-  //           type: 'sawtooth',
-  //           volume: volValue,
-  //           frequency: 261
-  //       }
-  //    });
+  body.addEventListener('keydown', function(event) {
+    if(event.key === 'a' && currentSound === null) {
+      currentSound = new Pizzicato.Sound({ 
+      source: 'wave',
+        options: {
+            type: 'sawtooth',
+            volume: volumeValue,
+            frequency: 261
+        }
+     });
+         currentSound.play();
+       }
+     })
 
-  //     currentSound.play();
-  //   }
-  // })
+  body.addEventListener('keyup', function(event) {
+        if(currentSound !== null) {
+          currentSound.stop();
+          currentSound = null;
+        }
+      });
 
-  // body.addEventListener('keyup', function(event) {
-  //     if(currentSound !== null) {
-  //       currentSound.stop();
-  //       currentSound = null;
-  //     }
-  //   });
+     body.addEventListener('keydown', function(event) {
+         if(event.key === 's' && currentSound === null) {
+           currentSound = new Pizzicato.Sound({ 
+           source: 'wave',
+             options: {
+                 type: 'sawtooth',
+                 volume: volumeValue,
+                 frequency: 293.66
+             }
+          });
+
+      currentSound.play();
+    }
+  })
+
+  body.addEventListener('keyup', function(event) {
+      if(currentSound !== null) {
+        currentSound.stop();
+        currentSound = null;
+      }
+    });
+
+
+     body.addEventListener('keydown', function(event) {
+         if(event.key === 'd' && currentSound === null) {
+           currentSound = new Pizzicato.Sound({ 
+           source: 'wave',
+             options: {
+                 type: 'sawtooth',
+                 volume: volumeValue,
+                 frequency: 329.63
+             }
+          });
+
+      currentSound.play();
+    }
+  })
+
+  body.addEventListener('keyup', function(event) {
+      if(currentSound !== null) {
+        currentSound.stop();
+        currentSound = null;
+      }
+    });
 }
