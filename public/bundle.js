@@ -114,14 +114,17 @@ window.onload = () => {
   const pitchSlider = document.getElementById('pitchOsc1');
   // const pitchOsc1 = new Pitch(osc1, pitchSlider);
   const volumeSlider = document.getElementById('volumeOsc1');
-
   const osc1Volume = new Volume(osc1, volumeSlider);
 
   const pitchSliderOsc2 = document.getElementById('pitchOsc2');
   const pitchOsc2 = new Pitch(osc2, pitchSliderOsc2);
+  const volumeSlider2 = document.getElementById('volumeOsc2');
+  const osc2Volume = new Volume(osc2, volumeSlider2);
 
   const pitchSliderOsc3 = document.getElementById('pitchOsc3');
   const pitchOsc3 = new Pitch(osc3, pitchSliderOsc3);
+  const volumeSlider3 = document.getElementById('volumeOsc3');
+  const osc3Volume = new Volume(osc3, volumeSlider3);
 
   // sawtoothWave.play();  /stacked ocsilators work
   // squareWave.play();
@@ -148,8 +151,8 @@ window.onload = () => {
       osc1.play();
       osc2.sourceNode.frequency.value = hash[event.key];
       osc2.play();
-      // osc3.sourceNode.frequency.value = hash[event.key];
-      // osc3.play();
+      osc3.sourceNode.frequency.value = hash[event.key];
+      osc3.play();
     }
 
     // if(event.key === 'c') {
@@ -177,6 +180,7 @@ window.onload = () => {
 
     osc1.stop();
     osc2.stop();
+    osc3.stop();
   });
 
      body.addEventListener('keydown', function(event) {
@@ -202,27 +206,27 @@ window.onload = () => {
     });
 
 
-     body.addEventListener('keydown', function(event) {
-         if(event.key === 'd' && currentSound === null) {
-           currentSound = new Pizzicato.Sound({ 
-           source: 'wave',
-             options: {
-                 type: 'sawtooth',
-                 volume: osc1Volume.volumeValue,
-                 frequency: 329.63
-             }
-          });
+  //    body.addEventListener('keydown', function(event) {
+  //        if(event.key === 'd' && currentSound === null) {
+  //          currentSound = new Pizzicato.Sound({ 
+  //          source: 'wave',
+  //            options: {
+  //                type: 'sawtooth',
+  //                volume: osc1Volume.volumeValue,
+  //                frequency: 329.63
+  //            }
+  //         });
 
-      currentSound.play();
-    }
-  })
+  //     currentSound.play();
+  //   }
+  // })
 
-  body.addEventListener('keyup', function(event) {
-      if(currentSound !== null) {
-        currentSound.stop();
-        currentSound = null;
-      }
-    });
+  // body.addEventListener('keyup', function(event) {
+  //     if(currentSound !== null) {
+  //       currentSound.stop();
+  //       currentSound = null;
+  //     }
+  //   });
 }
 
 
