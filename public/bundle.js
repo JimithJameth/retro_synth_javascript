@@ -152,7 +152,6 @@ window.onload = () => {
   body.addEventListener('keydown', function(event) {
 
     if(hash[event.key] !== null && hash[event.key] !== undefined) {
-      console.log('d');
       osc1.sourceNode.frequency.value = hash[event.key];
       osc1.play();
       osc2.play();

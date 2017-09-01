@@ -6,12 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "webpack -w"
+    "bundle": "webpack -w"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.4",
+    "oscilloscope": "^1.0.0",
     "pizzicato": "^0.6.1",
     "webpack": "^3.5.5"
   }
