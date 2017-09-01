@@ -4,7 +4,7 @@ const Volume = require('./volume.js')
 
 window.onload = () => {
 
-  var sawtoothWave = new Pizzicato.Sound({ 
+  var osc1 = new Pizzicato.Sound({ 
     source: 'wave',
     options: {
       type: 'sawtooth',
@@ -13,7 +13,7 @@ window.onload = () => {
         }
       });
 
-  var squareWave = new Pizzicato.Sound({
+  var osc2 = new Pizzicato.Sound({
     source: 'wave',
     options: {
       type: 'square',
@@ -22,7 +22,7 @@ window.onload = () => {
     }
   });
 
-  var sineWave = new Pizzicato.Sound({
+  var osc3 = new Pizzicato.Sound({
     source: 'wave',
     options: {
      type: 'sine',
@@ -31,16 +31,28 @@ window.onload = () => {
    }
  });
 
+  var hash = {
+    a: 261.63, // c
+    s: 293.66, // d
+    d: 329.63, // e
+    f: 349.23, // f
+    g: 392.00, // g
+    h: 440.00, // a
+    j: 493.88, // b 
+    k: 523.25, // c
+  }
+
   const pitchSlider = document.getElementById('pitchOsc1');
-  const pitchOsc1 = new Pitch(sawtoothWave, pitchSlider);
-  const vol = document.getElementById('volumeOsc1');
-    let volumeValue = 0.1;
+  // const pitchOsc1 = new Pitch(osc1, pitchSlider);
+  const volumeSlider = document.getElementById('volumeOsc1');
+
+  const osc1Volume = new Volume(osc1, volumeSlider);
 
   const pitchSliderOsc2 = document.getElementById('pitchOsc2');
-  const pitchOsc2 = new Pitch(squareWave, pitchSliderOsc2);
+  const pitchOsc2 = new Pitch(osc2, pitchSliderOsc2);
 
   const pitchSliderOsc3 = document.getElementById('pitchOsc3');
-  const pitchOsc3 = new Pitch(sineWave, pitchSliderOsc3);
+  const pitchOsc3 = new Pitch(osc3, pitchSliderOsc3);
 
   // sawtoothWave.play();  /stacked ocsilators work
   // squareWave.play();
@@ -61,25 +73,42 @@ window.onload = () => {
   let currentSound = null;
 
   body.addEventListener('keydown', function(event) {
-    if(event.key === 'a' && currentSound === null) {
-      currentSound = new Pizzicato.Sound({ 
-      source: 'wave',
-        options: {
-            type: 'sawtooth',
-            volume: volumeValue,
-            frequency: 261
-        }
-     });
-         currentSound.play();
-       }
+
+    if(hash[event.key] !== null && hash[event.key] !== undefined) {
+      osc1.sourceNode.frequency.value = hash[event.key];
+      osc1.play();
+      osc2.sourceNode.frequency.value = hash[event.key];
+      osc2.play();
+      // osc3.sourceNode.frequency.value = hash[event.key];
+      // osc3.play();
+    }
+
+    // if(event.key === 'c') {
+    //   osc1.sourceNode.frequency.value = hash[event.key];
+    //  //  currentSound = new Pizzicato.Sound({ 
+    //  //  source: 'wave',
+    //  //    options: {
+    //  //        type: 'sawtooth',
+    //  //        volume: osc1Volume.volumeValue,
+    //  //        frequency: 261
+    //  //    }
+    //  // });
+    //      osc1.play();
+    // }else if(event.key === 'e') {
+
+    // }
+
+
      })
 
   body.addEventListener('keyup', function(event) {
-        if(currentSound !== null) {
-          currentSound.stop();
-          currentSound = null;
-        }
-      });
+    // if(currentSound !== null) {
+    //   currentSound = null;
+    // }
+
+    osc1.stop();
+    osc2.stop();
+  });
 
      body.addEventListener('keydown', function(event) {
          if(event.key === 's' && currentSound === null) {
@@ -87,7 +116,7 @@ window.onload = () => {
            source: 'wave',
              options: {
                  type: 'sawtooth',
-                 volume: volumeValue,
+                 volume: osc1Volume.volumeValue,
                  frequency: 293.66
              }
           });
@@ -110,7 +139,7 @@ window.onload = () => {
            source: 'wave',
              options: {
                  type: 'sawtooth',
-                 volume: volumeValue,
+                 volume: osc1Volume.volumeValue,
                  frequency: 329.63
              }
           });
