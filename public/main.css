@@ -1,6 +1,14 @@
-#osc {
-  background-color: purple;
-  width:200px;
-  height:200px;
+body {
+  background-image: url("neongrid.png");
 }
+
+p {
+  color:white;
+}
+
+
+
+
+
+
 
