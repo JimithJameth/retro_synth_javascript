@@ -1,6 +1,7 @@
 const Pizzicato = require('pizzicato');
 const Pitch = require('./pitch.js');
-const Volume = require('./volume.js')
+const Volume = require('./volume.js');
+const LowpassFilter = require('./lowpass.js')
 
 window.onload = () => {
 
@@ -9,26 +10,27 @@ window.onload = () => {
     options: {
       type: 'sawtooth',
       volume: 0.1,
-          frequency: 261.63,
-          attack: 0.2,
-          release: 0.8 // note C
+      frequency: 261.63,
+      attack: 0.2,
+          release: 0.2 // note C
         }
       });
   var reverb = new Pizzicato.Effects.Reverb({
-      time: 1,
-      decay: 0.8,
-      reverse: true,
-      mix: 0.5
+    time: 1,
+    decay: 0.8,
+    reverse: true,
+    mix: 0.5
   });
   osc1.addEffect(reverb);
 
-  var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-      frequency: 500,
-      peak: 10
-  });
+  // var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
+  //   frequency: 700,
+  //   peak: 10
+  // });
 
-  osc1.addEffect(lowPassFilter);
+  // osc1.addEffect(lowPassFilter);
   
+
 
   var osc2 = new Pizzicato.Sound({
     source: 'wave',
@@ -39,18 +41,32 @@ window.onload = () => {
     }
   });
 
+  var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
+   frequency: 700,
+   peak: 10
+ });
+  osc1.addEffect(lowPassFilter);
+
   var reverb = new Pizzicato.Effects.Reverb({
-      time: 1,
-      decay: 0.8,
-      reverse: true,
-      mix: 0.5
+    time: 1,
+    decay: 0.8,
+    reverse: true,
+    mix: 0.5
   });
   osc2.addEffect(reverb);
+
+  var pingPongDelay = new Pizzicato.Effects.PingPongDelay({
+    feedback: 0.75,
+    time: 0.6,
+    mix: 0.5
+  });
+
+  osc2.addEffect(pingPongDelay);
 
   var osc3 = new Pizzicato.Sound({
     source: 'wave',
     options: {
-     type: 'sawtooth',
+     type: 'square',
      volume:0.1,
      frequency: 392.00 // note G
    }
@@ -111,10 +127,13 @@ window.onload = () => {
     k: 783.99, // g
   }
 
-  const pitchSlider = document.getElementById('pitchOsc1');
+  // const pitchSlider = document.getElementById('pitchOsc1');
   // const pitchOsc1 = new Pitch(osc1, pitchSlider);
   const volumeSlider = document.getElementById('volumeOsc1');
   const osc1Volume = new Volume(osc1, volumeSlider);
+
+  const lowpassFilterSlider = document.getElementById("lowpassFilter")
+  const osc1LowpassFilter = new LowpassFilter(osc1, lowpassFilterSlider);
 
   const pitchSliderOsc2 = document.getElementById('pitchOsc2');
   const pitchOsc2 = new Pitch(osc2, pitchSliderOsc2);
@@ -130,15 +149,6 @@ window.onload = () => {
   // squareWave.play();
   // sineWave.play();
 
-  // const vol = document.getElementById('volume');
-  // let volValue = 0.1;
-
-  // vol.addEventListener('change', function(event) {
-  //   volValue = parseFloat(event.target.value);
-
-  //   sawtoothWave.volume = volValue;
-
-  //   })
 
 
   const body = document.getElementById('body');
@@ -160,77 +170,20 @@ window.onload = () => {
 
       console.log(osc2Hash)
     }
-
-    // if(event.key === 'c') {
-    //   osc1.sourceNode.frequency.value = hash[event.key];
-    //  //  currentSound = new Pizzicato.Sound({ 
-    //  //  source: 'wave',
-    //  //    options: {
-    //  //        type: 'sawtooth',
-    //  //        volume: osc1Volume.volumeValue,
-    //  //        frequency: 261
-    //  //    }
-    //  // });
-    //      osc1.play();
-    // }else if(event.key === 'e') {
-
-    // }
-
-
-     })
+  })
 
   body.addEventListener('keyup', function(event) {
-    // if(currentSound !== null) {
-    //   currentSound = null;
-    // }
 
     osc1.stop();
     osc2.stop();
     osc3.stop();
   });
 
-  //    body.addEventListener('keydown', function(event) {
-  //        if(event.key === 's' && currentSound === null) {
-  //          currentSound = new Pizzicato.Sound({ 
-  //          source: 'wave',
-  //            options: {
-  //                type: 'sawtooth',
-  //                volume: osc1Volume.volumeValue,
-  //                frequency: 293.66
-  //            }
-  //         });
-
-  //     currentSound.play();
-  //   }
-  // })
 
   body.addEventListener('keyup', function(event) {
-      if(currentSound !== null) {
-        currentSound.stop();
-        currentSound = null;
-      }
-    });
-
-
-  //    body.addEventListener('keydown', function(event) {
-  //        if(event.key === 'd' && currentSound === null) {
-  //          currentSound = new Pizzicato.Sound({ 
-  //          source: 'wave',
-  //            options: {
-  //                type: 'sawtooth',
-  //                volume: osc1Volume.volumeValue,
-  //                frequency: 329.63
-  //            }
-  //         });
-
-  //     currentSound.play();
-  //   }
-  // })
-
-  // body.addEventListener('keyup', function(event) {
-  //     if(currentSound !== null) {
-  //       currentSound.stop();
-  //       currentSound = null;
-  //     }
-  //   });
+    if(currentSound !== null) {
+      currentSound.stop();
+      currentSound = null;
+    }
+  });
 }
