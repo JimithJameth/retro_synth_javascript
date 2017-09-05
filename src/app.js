@@ -42,7 +42,7 @@ window.onload = () => {
   });
 
   var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-   frequency: 700,
+    frequency: 1000,
    peak: 10
  });
   osc1.addEffect(lowPassFilter);

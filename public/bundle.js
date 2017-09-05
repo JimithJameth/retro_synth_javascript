@@ -111,7 +111,7 @@ window.onload = () => {
   });
 
   var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-   frequency: 700,
+    frequency: 1000,
    peak: 10
  });
   osc1.addEffect(lowPassFilter);
@@ -346,16 +346,16 @@ module.exports = Volume;
 const LowpassFilter = function(sound, element) {
   this.lowpassFilterValue = 250;
   this.sound = sound;
-    element.addEventListener('change', this.watchFilterSlider.bind(this) )
-  }
-  console.log(this);
+  element.addEventListener('change', this.watchFilterSlider.bind(this) )
+}
+console.log(this);
 
-  LowpassFilter.prototype.watchFilterSlider = function(event) {
-    this.lowPassFilterValue = parseFloat(event.target.value);
-    this.sound.filterNode.frequency.value = this.lowpassFilterValue;
-  }
+LowpassFilter.prototype.watchFilterSlider = function(event) {
+  this.lowPassFilterValue = parseFloat(event.target.value);
+  this.sound.filterNode.frequency.value = this.lowpassFilterValue;
+}
 
-  module.exports = LowpassFilter;
+module.exports = LowpassFilter;
 
 /***/ })
 /******/ ]);

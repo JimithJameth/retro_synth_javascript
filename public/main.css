@@ -7,16 +7,19 @@ p {
   color:white;
 }
 
-h2 {
+h2.style1 {
   font-family: "ZX-Spectrum",Regular;
-  margin-left: 1600px;
+  margin-left: 423px;
+  margin-bottom: -145px;
+  margin-top: 146px;
   color:white;
-  font-size: 50px;
+  font-size: 113px;
+  text-align: left;
 }
 
 h1 {
   font-family: "ZX-Spectrum",Regular;
-    margin-left: 250px;
+    margin-left: 310px;
     color:white;
     font-size: 50px;
 }
@@ -85,10 +88,20 @@ select{
   background-image: url("glassesglow.png");
   margin-left: 600px;
   margin-right:0px:;
-  margin-top:-92px;
+  margin-top:-120px;
   margin-bottom:0px; 
 }
 
+h2.style2{
+  font-family: "ZX-Spectrum",Regular;
+    margin-left: 423px;
+    margin-right: 400px;
+    margin-bottom: -145px;
+    margin-top: 44px;
+    color:white;
+    font-size: 113px;
+    text-align: right;
+}
 
 
 
