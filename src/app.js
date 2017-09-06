@@ -23,14 +23,6 @@ window.onload = () => {
   });
   osc1.addEffect(reverb);
 
-  // var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-  //   frequency: 700,
-  //   peak: 10
-  // });
-
-  // osc1.addEffect(lowPassFilter);
-  
-
 
   var osc2 = new Pizzicato.Sound({
     source: 'wave',
@@ -43,8 +35,8 @@ window.onload = () => {
 
   var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
     frequency: 1000,
-   peak: 10
- });
+    peak: 10
+  });
   osc1.addEffect(lowPassFilter);
 
   var reverb = new Pizzicato.Effects.Reverb({
@@ -72,12 +64,6 @@ window.onload = () => {
    }
  });
 
-  // var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-  //     frequency: 400,
-  //     peak: 10
-  // });
-
-  // sound.addEffect(lowPassFilter);
 
   var osc1Hash = {
     a: 130.81, // c
@@ -127,8 +113,6 @@ window.onload = () => {
     k: 783.99, // g
   }
 
-  // const pitchSlider = document.getElementById('pitchOsc1');
-  // const pitchOsc1 = new Pitch(osc1, pitchSlider);
   const volumeSlider = document.getElementById('volumeOsc1');
   const osc1Volume = new Volume(osc1, volumeSlider);
 
@@ -145,19 +129,12 @@ window.onload = () => {
   const volumeSlider3 = document.getElementById('volumeOsc3');
   const osc3Volume = new Volume(osc3, volumeSlider3);
 
-  // sawtoothWave.play();  /stacked ocsilators work
-  // squareWave.play();
-  // sineWave.play();
-
-
 
   const body = document.getElementById('body');
   let currentSound = null;
 
   body.addEventListener('keydown', function(event) {
-    // osc1.stop();
-    // osc2.stop();
-    // osc3.stop();
+
 
     if(osc1Hash[event.key] !== null && osc1Hash[event.key] !== undefined) {
       osc1.sourceNode.frequency.value = osc1Hash[event.key];
