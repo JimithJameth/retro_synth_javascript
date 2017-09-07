@@ -127,7 +127,7 @@ window.onload = () => {
   var osc3 = new Pizzicato.Sound({
     source: 'wave',
     options: {
-     type: 'square',
+      type: 'sawtooth',
      volume:0.1,
      frequency: 392.00 // note G
    }
