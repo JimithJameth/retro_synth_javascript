@@ -70,7 +70,6 @@
 const Pizzicato = __webpack_require__(1);
 const Pitch = __webpack_require__(4);
 const Volume = __webpack_require__(5);
-const LowpassFilter = __webpack_require__(6)
 
 window.onload = () => {
 
@@ -184,9 +183,6 @@ window.onload = () => {
 
   const volumeSlider = document.getElementById('volumeOsc1');
   const osc1Volume = new Volume(osc1, volumeSlider);
-
-  const lowpassFilterSlider = document.getElementById("lowpassFilter")
-  const osc1LowpassFilter = new LowpassFilter(osc1, lowpassFilterSlider);
 
   const pitchSliderOsc2 = document.getElementById('pitchOsc2');
   const pitchOsc2 = new Pitch(osc2, pitchSliderOsc2);
@@ -315,24 +311,6 @@ Volume.prototype.watchVolSlider = function(event){
 }
 
 module.exports = Volume;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-const LowpassFilter = function(sound, element) {
-  this.lowpassFilterValue = 250;
-  this.sound = sound;
-  element.addEventListener('change', this.watchFilterSlider.bind(this) )
-}
-console.log(this);
-
-LowpassFilter.prototype.watchFilterSlider = function(event) {
-  this.lowPassFilterValue = parseFloat(event.target.value);
-  this.sound.filterNode.frequency.value = this.lowpassFilterValue;
-}
-
-module.exports = LowpassFilter;
 
 /***/ })
 /******/ ]);

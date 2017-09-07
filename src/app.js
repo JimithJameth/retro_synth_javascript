@@ -1,7 +1,6 @@
 const Pizzicato = require('pizzicato');
 const Pitch = require('./pitch.js');
 const Volume = require('./volume.js');
-const LowpassFilter = require('./lowpass.js')
 
 window.onload = () => {
 
@@ -115,9 +114,6 @@ window.onload = () => {
 
   const volumeSlider = document.getElementById('volumeOsc1');
   const osc1Volume = new Volume(osc1, volumeSlider);
-
-  const lowpassFilterSlider = document.getElementById("lowpassFilter")
-  const osc1LowpassFilter = new LowpassFilter(osc1, lowpassFilterSlider);
 
   const pitchSliderOsc2 = document.getElementById('pitchOsc2');
   const pitchOsc2 = new Pitch(osc2, pitchSliderOsc2);
